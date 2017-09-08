@@ -1,0 +1,7 @@
+.Keypad {
+  display: block;
+}
+
+.Keypad-row {
+  display: flex;
+}
