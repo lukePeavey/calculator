@@ -12,6 +12,10 @@
   border-color: #aaa;
 }
 
+.Key.active {
+  background: #efefef;
+}
+
 .Key:first-of-type {
   border-left: solid 1px #aaa;
 }
