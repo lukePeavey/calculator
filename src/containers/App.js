@@ -95,14 +95,19 @@ class AppContainer extends Component {
     const operation = key.id
 
     if (currentOperation) {
-      // @todo handle multiple operations without pressing equals in between.
-    } else {
-      this.setState({
-        currentOperation: operation,
-        currentOutput: displayValue,
-        resetDisplayValueOnNextKeyPress: true
-      })
+      // When chaining multiple operations without pressing equals in between.
+      // This first calls the equals handler, which processes the last operation,
+      // then initiates the operation that was just selected, using the output
+      // of the last operation as the first input value.
+      // @todo sequential setState calls might be a problem
+      this.handleEqualsKey()
     }
+
+    this.setState(prevState => ({
+      currentOperation: operation,
+      currentOutput: prevState.displayValue,
+      resetDisplayValueOnNextKeyPress: true
+    }))
   }
 
   /**
@@ -143,6 +148,7 @@ class AppContainer extends Component {
     return (
       <App
         keys={keypads[this.state.mode]}
+        currentOperation={this.state.currentOperation}
         displayValue={this.state.displayValue}
         handleClick={this.handleClick}
       />
