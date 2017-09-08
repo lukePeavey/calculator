@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import App from '../components/app/App'
 import keypads from '../global/keypads'
 import { camelCase } from 'lodash'
+import Decimal from 'decimal.js'
 
 class AppContainer extends Component {
+  componentDidMount() {
+    window.Decimal = Decimal
+  }
   state = {
     /**
      * Display value is the current value shown on the display screen
@@ -42,11 +46,85 @@ class AppContainer extends Component {
     mode: 'basic'
   }
 
-  // Define a separate method to handle each type of key
-  handleNumberKey = key => {}
-  handleClearKey = key => {}
-  handleEqualsKey = key => {}
-  handleBinaryOperationKey = key => {}
+  /**
+   * Handle Number Key
+   * Also handles the decimal key
+   */
+  handleNumberKey = key => {
+    const {
+      displayValue: prevDisplayValue,
+      resetDisplayValueOnNextKeyPress
+    } = this.state
+
+    const number = key.textContent // get the number
+    let displayValue = resetDisplayValueOnNextKeyPress ? '' : prevDisplayValue
+
+    // Handle decimal key...
+    // if display value already contains a decimal, the key has no effect
+    if (key.id === 'decimal' && !displayValue.includes('.')) {
+      // A leading 0 is shown when the decimal is added to 0
+      displayValue = displayValue ? displayValue + '.' : '0.'
+    } else if (key.id !== 'decimal') {
+      displayValue += number
+    }
+
+    this.setState({
+      displayValue: displayValue.replace(/^0+(?!\.)/, ''), // strip leading zeroes
+      resetDisplayValueOnNextKeyPress: false
+    })
+  }
+
+  /**
+   * Handle Clear key
+   * This resets the app to initial state.
+   */
+  handleClearKey = key => {
+    this.setState({
+      currentOperation: null,
+      currentOutput: null,
+      displayValue: 0,
+      resetDisplayValueOnNextKeyPress: true
+    })
+  }
+
+  /**
+   * Handle Binary Operations
+   */
+  handleBinaryOperationKey = key => {
+    const { currentOperation, currentOutput, displayValue } = this.state
+    const operation = key.id
+
+    if (currentOperation) {
+      // @todo handle multiple operations without pressing equals in between.
+    } else {
+      this.setState({
+        currentOperation: operation,
+        currentOutput: displayValue,
+        resetDisplayValueOnNextKeyPress: true
+      })
+    }
+  }
+
+  /**
+   * Handle equals key
+   * @todo support pressing equals multiple times to repeat the previous
+   * operation. Test Apple's calculator to see what the expected behavior is.
+   */
+  handleEqualsKey = () => {
+    const { currentOperation, currentOutput, displayValue } = this.state
+    const firstOperand = new Decimal(currentOutput)
+    const secondOperand = displayValue
+
+    let output = firstOperand[currentOperation](secondOperand)
+
+    this.setState({
+      currentOperation: null,
+      currentOutput: output,
+      displayValue: output.toString(),
+      resetDisplayValueOnNextKeyPress: true
+    })
+  }
+
   handleUnaryOperationKey = key => {}
 
   /**
@@ -57,7 +135,7 @@ class AppContainer extends Component {
     console.group('Key Pressed')
     console.info(type, event.currentTarget.id)
     // Decide which method to call based on key type
-    this[camelCase(`handle-${type}-Key`)](event.currentTarget) // hard to read?
+    this[camelCase(`handle-${type}-Key`)].call(this, event.currentTarget)
     console.groupEnd()
   }
 
