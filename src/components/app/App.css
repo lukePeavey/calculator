@@ -1,3 +1,26 @@
+/* On mobile screens, the calculator should fill the entire viewport.
+On larger screens, there is a fixed width/height.
+@todo - Check current browser support for vw/vh units  */
+
 .App {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+.calculator {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+@media screen and (min-width: 400px) {
+  .calculator {
+    height: 500px;
+    width: 380px;
+  }
 }

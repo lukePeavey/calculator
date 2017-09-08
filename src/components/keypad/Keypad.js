@@ -1,5 +1,6 @@
 import React from 'react'
 import Key from '../key/Key'
+import './Keypad.css'
 
 const Keypad = ({ keys: keypadRows, handleClick }) => (
   <section className="Keypad">

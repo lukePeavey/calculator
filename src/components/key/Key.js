@@ -1,4 +1,5 @@
 import React from 'react'
+import './Key.css'
 
 const Key = ({ label, type, ...props }) => {
   return (

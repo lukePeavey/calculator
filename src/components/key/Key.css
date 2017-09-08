@@ -1,3 +1,28 @@
-.key {
-  display: inline-flex;
+/* Height width of keys is set with flexbox */
+.Key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 25%;
+  align-self: stretch;
+  border-style: solid;
+  border-width: 0;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #aaa;
+}
+
+.Key:first-of-type {
+  border-left: solid 1px #aaa;
+}
+
+/* Keys with special styles */
+#zero {
+  /* The zero is twice the width of other keys */
+  flex: 2 0 50%;
+}
+
+.Key-label {
+  font-size: 22px;
+  font-weight: 300;
 }

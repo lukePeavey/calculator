@@ -1,3 +1,17 @@
 .Display {
   display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex: 1 0 20%;
+  max-height: 100px;
+  background-color: #eee;
+  border: solid 1px #aaa;
+  border-bottom-width: 0;
+}
+
+.Display-value {
+  margin: 20px;
+  font-size: 30px;
+  font-weight: 300;
+  color: #333;
 }
