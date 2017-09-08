@@ -17,7 +17,7 @@ export const zero =  { type: 'number', label: '0',  id: 'zero' }
 export const decimal = { type: 'number', label: '.',  id: 'decimal' }
 
 // Binary Operation Keys
-export const add =  { type: 'binaryOperation',  abel: '&plus;', id: 'plus' }
+export const add =  { type: 'binaryOperation',  label: '&plus;', id: 'plus' }
 export const subtract = { type: 'binaryOperation', label: '&minus;', id: 'minus' }
 export const multiply = { type: 'binaryOperation', label: '&times;', id: 'times' }
 export const divide = { type: 'binaryOperation', label: '&divide;', id: 'div' }
