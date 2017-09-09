@@ -5,9 +5,6 @@ import { camelCase } from 'lodash'
 import Decimal from 'decimal.js'
 
 class AppContainer extends Component {
-  componentDidMount() {
-    window.Decimal = Decimal
-  }
   state = {
     /**
      * Display value is the current value shown on the display screen
@@ -75,20 +72,7 @@ class AppContainer extends Component {
   }
 
   /**
-   * Handle Clear key
-   * This resets the app to initial state.
-   */
-  handleClearKey = key => {
-    this.setState({
-      currentOperation: null,
-      currentOutput: null,
-      displayValue: 0,
-      resetDisplayValueOnNextKeyPress: true
-    })
-  }
-
-  /**
-   * Handle Binary Operations
+   * Handle Binary Operations (operations with two input values)
    */
   handleBinaryOperationKey = key => {
     const { currentOperation, currentOutput, displayValue } = this.state
@@ -111,9 +95,30 @@ class AppContainer extends Component {
   }
 
   /**
+   * Handle unary operations (operations with one input value).
+   * Unary operations are performed directly on the display value. The
+   * current display value is used as the input (operand), and the result of
+   * the operation (output) becomes the new display value.
+   */
+  handleUnaryOperationKey = key => {
+    const operation = key.id
+    const operand = new Decimal(this.state.displayValue)
+    let output = undefined
+
+    // Handle special keys that dont have a corresponding method
+    if (operation === 'percent') {
+      output = operand.dividedBy(100)
+    } else {
+      output = operand[operation]()
+    }
+
+    this.setState({ displayValue: output.toString() })
+  }
+
+  /**
    * Handle equals key
    * @todo support pressing equals multiple times to repeat the previous
-   * operation. Test Apple's calculator to see what the expected behavior is.
+   * operation.
    */
   handleEqualsKey = () => {
     const { currentOperation, currentOutput, displayValue } = this.state
@@ -135,25 +140,16 @@ class AppContainer extends Component {
   }
 
   /**
-   * Handle unary operations (operations with one input value).
-   *
-   * Unary operations are performed directly on the display value. The
-   * current display value is used as the input (operand), and the result of
-   * the operation (output) becomes the new display value.
+   * Handle Clear key
+   * This resets the app to initial state.
    */
-  handleUnaryOperationKey = key => {
-    const operation = key.id
-    const operand = new Decimal(this.state.displayValue)
-    let output = undefined
-
-    // Handle special keys that dont have a corresponding method
-    if (operation === 'percent') {
-      output = operand.dividedBy(100)
-    } else {
-      output = operand[operation]()
-    }
-
-    this.setState({ displayValue: output.toString() })
+  handleClearKey = key => {
+    this.setState({
+      currentOperation: null,
+      currentOutput: null,
+      displayValue: 0,
+      resetDisplayValueOnNextKeyPress: true
+    })
   }
 
   /**
