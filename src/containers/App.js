@@ -117,9 +117,13 @@ class AppContainer extends Component {
    */
   handleEqualsKey = () => {
     const { currentOperation, currentOutput, displayValue } = this.state
+
+    if (!currentOperation) {
+      return
+    }
+
     const firstOperand = new Decimal(currentOutput)
     const secondOperand = displayValue
-
     let output = firstOperand[currentOperation](secondOperand)
 
     this.setState({
