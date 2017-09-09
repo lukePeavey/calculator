@@ -6,7 +6,8 @@
   flex: 1 0 25%;
   align-self: stretch;
   border-style: solid;
-  border-width: 0;
+  border-left-width: 0;
+  border-top-width: 0;
   border-right-width: 1px;
   border-bottom-width: 1px;
   background: #e0e0e7;
@@ -17,7 +18,7 @@
 }
 
 .Key:first-of-type {
-  border-left: solid 1px #aaa;
+  border-left-width: 1px !important;
 }
 
 /* Keys with special styles
