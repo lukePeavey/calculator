@@ -24,7 +24,7 @@ export const divide = { type: 'binaryOperation', label: '&divide;', id: 'div' }
 export const pow = { type: 'binaryOperation', label: 'x<sup>y</sup>', id: 'pow' }
 
 // Unary Operation Keys
-export const negate = { type: 'unaryOperation', label: '&plus;/&minus;', id: 'negate' }
+export const negate = { type: 'unaryOperation', label: '&plus;/&minus;', id: 'neg' }
 export const percent = { type: 'unaryOperation', label: '%', id: 'percent' }
 
 // @todo Add keys for scientific calculator

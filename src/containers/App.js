@@ -134,7 +134,27 @@ class AppContainer extends Component {
     })
   }
 
-  handleUnaryOperationKey = key => {}
+  /**
+   * Handle unary operations (operations with one input value).
+   *
+   * Unary operations are performed directly on the display value. The
+   * current display value is used as the input (operand), and the result of
+   * the operation (output) becomes the new display value.
+   */
+  handleUnaryOperationKey = key => {
+    const operation = key.id
+    const operand = new Decimal(this.state.displayValue)
+    let output = undefined
+
+    // Handle special keys that dont have a corresponding method
+    if (operation === 'percent') {
+      output = operand.dividedBy(100)
+    } else {
+      output = operand[operation]()
+    }
+
+    this.setState({ displayValue: output.toString() })
+  }
 
   /**
    * Handles click event for all calculator keys
