@@ -147,7 +147,7 @@ class AppContainer extends Component {
     this.setState({
       currentOperation: null,
       currentOutput: null,
-      displayValue: 0,
+      displayValue: '0',
       resetDisplayValueOnNextKeyPress: true
     })
   }
@@ -169,6 +169,7 @@ class AppContainer extends Component {
       <App
         keys={keypads[this.state.mode]}
         currentOperation={this.state.currentOperation}
+        mode={this.state.mode}
         displayValue={this.state.displayValue}
         handleClick={this.handleClick}
       />

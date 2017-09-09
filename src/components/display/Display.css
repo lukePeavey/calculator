@@ -2,16 +2,22 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  flex: 1 0 20%;
-  max-height: 100px;
-  background-color: #eee;
-  border: solid 1px #aaa;
+  flex: 1 1 0;
+  background: linear-gradient(45deg, #504b4b, #5e5757);
+  border: solid 1px #504b4b;
   border-bottom-width: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #f1f1f1;
+}
+
+@media screen and (min-width: 400px) {
+  .Display {
+    border-radius: 8px 8px 0 0;
+  }
 }
 
 .Display-value {
-  margin: 20px;
-  font-size: 30px;
-  font-weight: 300;
-  color: #333;
+  margin: 10px 20px 10px 10px;
+  font-size: 100%;
 }

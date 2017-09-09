@@ -1,9 +1,10 @@
 /* The keypad height is 80% of total height of the calculator.
 This allows the hight of the calculator to scale on smaller screens. */
 .Keypad {
+  position: relative;
   display: flex;
   flex-direction: column;
-  flex: 4 0 80%;
+  flex: 2.5 1 0;
 }
 
 .Keypad-row {

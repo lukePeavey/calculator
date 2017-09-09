@@ -9,24 +9,50 @@
   border-width: 0;
   border-right-width: 1px;
   border-bottom-width: 1px;
+  background: #e0e0e7;
   border-color: #aaa;
-}
-
-.Key.active {
-  background: #efefef;
+  font-size: 22px;
+  font-weight: 300;
+  transition: all 100ms;
 }
 
 .Key:first-of-type {
   border-left: solid 1px #aaa;
 }
 
-/* Keys with special styles */
+/* Keys with special styles
+**************************************************/
 #zero {
-  /* The zero is twice the width of other keys */
-  flex: 2 0 50%;
+  flex: 2 0 50%; /* The zero is twice the width of other keys */
+}
+.Key:last-of-type {
+  /* The symbols for the operation keys render smaller than regular characters
+ so they have a larger font size to make them look more equal */
+  font-size: 27px;
+}
+
+#percent,
+#neg,
+#clear {
+  /* These characters look slightly oversized, so they have a smaller font size */
+  font-size: 20px;
+}
+
+.Key:last-of-type {
+  background: #f77e1b;
+  color: #fff;
 }
 
 .Key-label {
-  font-size: 22px;
-  font-weight: 300;
+}
+
+/* Active state for regular keys */
+.Key:active,
+.Key.active {
+  background: #d8d8df;
+}
+
+.Key:last-of-type:active,
+.Key:last-of-type.active {
+  background: #ff8f39;
 }
