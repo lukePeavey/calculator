@@ -10,7 +10,5 @@ const keypads = {
     [key.one, key.two, key.three, key.add],
     [key.zero, key.decimal, key.equals]
   ]
-
-  // @todo Add scientific keypad
 }
 export default keypads
