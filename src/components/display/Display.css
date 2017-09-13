@@ -3,6 +3,7 @@
   justify-content: flex-end;
   align-items: flex-end;
   flex: 1 1 0;
+  padding: 10px 20px 10px 10px;
   background: linear-gradient(45deg, #504b4b, #5e5757);
   border: solid 1px #504b4b;
   border-bottom-width: 0;
@@ -12,12 +13,13 @@
 }
 
 @media screen and (min-width: 400px) {
-  .Display {
+  .basic .Display {
     border-radius: 8px 8px 0 0;
   }
 }
 
-.Display-value {
-  margin: 10px 20px 10px 10px;
-  font-size: 100%;
+@media screen and (min-width: 700px) {
+  .scientific .Display {
+    border-radius: 8px 8px 0 0;
+  }
 }

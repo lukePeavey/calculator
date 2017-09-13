@@ -16,13 +16,16 @@
   font-weight: 300;
   transition: all 100ms;
 }
+.Key.number {
+  background: #ededf3;
+}
 
 .Key:first-of-type {
   border-left-width: 1px !important;
 }
 
 /* Keys with special styles
-**************************************************/
+-----------------------------------------------*/
 #zero {
   flex: 2 0 50%; /* The zero is twice the width of other keys */
 }
@@ -56,4 +59,27 @@
 .Key:last-of-type:active,
 .Key:last-of-type.active {
   background: #ff8f39;
+}
+
+/* Styles for scientific mode
+-----------------------------------------------*/
+.calculator.scientific .Key {
+  font-size: 16px;
+  flex: 1 1 10%;
+}
+.calculator.scientific .Key.number {
+  font-size: 19px;
+}
+.calculator.scientific .Key:last-of-type {
+  font-size: 25px;
+}
+
+.calculator.scientific #zero {
+  flex: 2 0 20%;
+}
+
+.scientific #percent,
+.scientific #neg,
+.scientific #clear {
+  font-size: 16px;
 }
