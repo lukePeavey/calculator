@@ -2,9 +2,9 @@ import React from 'react'
 import Key from '../key/Key'
 import './Keypad.css'
 
-const Keypad = ({ keys: keypadRows, handleClick, currentOperation }) => (
+const Keypad = ({ keys: rows, handleClick, currentOperation, trigUnit }) => (
   <section className="Keypad">
-    {keypadRows.map((keys, index) => (
+    {rows.map((keys, index) => (
       <div className="Keypad-row" key={`row${index}`}>
         {keys.map(({ id, ...keyProps }) => {
           // @todo - Rename keys and keypad something else.
@@ -15,6 +15,7 @@ const Keypad = ({ keys: keypadRows, handleClick, currentOperation }) => (
               id={id}
               handleClick={handleClick}
               active={currentOperation === id}
+              trigUnit={trigUnit}
               {...keyProps}
             />
           )

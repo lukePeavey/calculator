@@ -49,9 +49,9 @@ class AppContainer extends Component {
 
     /**
      * Unit of measurement for angles
-     * @type {string} oneOf(['degrees', 'radians'])
+     * @type {string} oneOf(['deg', 'rad'])
      */
-    trigUnit: 'degrees'
+    trigUnit: 'deg'
   }
 
   /**
@@ -161,6 +161,14 @@ class AppContainer extends Component {
       displayValue: '0',
       resetDisplayValueOnNextKeyPress: true
     })
+  }
+
+  handleFunctionKey(key) {
+    if (key.id === 'trigUnit') {
+      this.setState(prevState => ({
+        trigUnit: prevState.trigUnit === 'deg' ? 'rad' : 'deg'
+      }))
+    }
   }
 
   /**
