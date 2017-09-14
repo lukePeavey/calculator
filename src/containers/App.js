@@ -54,6 +54,22 @@ class AppContainer extends Component {
     trigUnit: 'deg'
   }
 
+  // Set mode based on device orientation (only on small screens)
+  componentDidMount() {
+    const mobilePortrait = window.matchMedia('(max-width: 420px)')
+    const mobileLandscape = window.matchMedia(
+      '(max-width: 740px) and (max-height: 420px)'
+    )
+    const landscape = window.matchMedia('(orientation: landscape)')
+
+    const setMode = landscape => {
+      if (!(mobilePortrait.matches || mobileLandscape.matches)) return
+      this.setState({ mode: landscape.matches ? 'scientific' : 'basic' })
+    }
+    landscape.addListener(landscape => setMode(landscape))
+    setMode(landscape)
+  }
+
   /**
    * Handle Number Key
    * Also handles the decimal key
