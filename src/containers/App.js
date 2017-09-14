@@ -123,7 +123,10 @@ class AppContainer extends Component {
 
     let output = operand[operation]()
 
-    this.setState({ displayValue: output.toString() })
+    this.setState({
+      displayValue: output.toString(),
+      resetDisplayValueOnNextKeyPress: true
+    })
   }
 
   /**
