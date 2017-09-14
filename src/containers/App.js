@@ -112,16 +112,16 @@ class AppContainer extends Component {
    * the operation (output) becomes the new display value.
    */
   handleUnaryOperationKey = key => {
+    const { displayValue, trigUnit } = this.state
     const operation = key.id
-    const operand = new Decimal(this.state.displayValue)
-    let output = undefined
+    let operand = new Decimal(displayValue)
 
-    // Handle special keys that dont have a corresponding method
-    if (operation === 'percent') {
-      output = operand.dividedBy(100)
-    } else {
-      output = operand[operation]()
+    // Handle conversion between radians and degrees.
+    if (/^(sin|cos|tan)$/.test(operation) && trigUnit === 'deg') {
+      operand = operand.times(new Decimal(Math.PI).dividedBy(180))
     }
+
+    let output = operand[operation]()
 
     this.setState({ displayValue: output.toString() })
   }
