@@ -1,4 +1,4 @@
-/* Height width of keys is set with flexbox */
+/* The height and width of the keys is set with flexbox */
 .Key {
   display: flex;
   align-items: center;
@@ -10,50 +10,57 @@
   border-top-width: 0;
   border-right-width: 1px;
   border-bottom-width: 1px;
-  background: #e0e0e7;
-  border-color: #aaa;
-  font-size: 22px;
-  font-weight: 300;
-  transition: all 100ms;
+  background: #e5e5ea;
+  border-color: rgba(84, 77, 77, 0.25);
+  color: #6a6767;
+  font-size: 20px;
+  font-weight: 400;
+}
+.Key.number {
+  background: #ededf3;
 }
 
-.Key:first-of-type {
-  border-left-width: 1px !important;
+.Key:last-of-type {
+  border-right-width: 0;
 }
 
 /* Keys with special styles
-**************************************************/
+-----------------------------------------------*/
 #zero {
   flex: 2 0 50%; /* The zero is twice the width of other keys */
 }
-.Key:last-of-type {
-  /* The symbols for the operation keys render smaller than regular characters
- so they have a larger font size to make them look more equal */
-  font-size: 27px;
+.Key:last-of-type .Key-label {
+  /* Basic operation keys: add, subtract, multiply, divide, equals */
+  font-size: 130%;
 }
-
-#percent,
-#neg,
-#clear {
-  /* These characters look slightly oversized, so they have a smaller font size */
-  font-size: 20px;
+#clear .Key-label {
+  font-size: 86%;
 }
-
+.Key.number .Key-label {
+  font-size: 110%;
+}
 .Key:last-of-type {
-  background: #f77e1b;
+  background: #f59330;
   color: #fff;
-}
-
-.Key-label {
 }
 
 /* Active state for regular keys */
 .Key:active,
 .Key.active {
-  background: #d8d8df;
+  background: linear-gradient(to left, #d5d5db, #dfdfdf);
 }
-
 .Key:last-of-type:active,
 .Key:last-of-type.active {
-  background: #ff8f39;
+  background: linear-gradient(to left, #db944c, #ed9c4a);
+}
+
+/* Styles for scientific mode
+-----------------------------------------------*/
+.scientific .Key {
+  flex: 1 1 10%;
+  font-size: 17px;
+  border-color: rgba(84, 77, 77, 0.17);
+}
+.calculator.scientific #zero {
+  flex: 2 0 20%;
 }

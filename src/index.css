@@ -7,6 +7,15 @@ html {
 *::after {
   box-sizing: inherit;
 }
+a, button, input, textarea {
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+button {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+}
 
 button,
 input {

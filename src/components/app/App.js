@@ -3,11 +3,11 @@ import Keypad from '../keypad/Keypad'
 import Display from '../display/Display'
 import './App.css'
 
-const App = ({ displayValue, mode, ...keypadProps }) => (
+const App = ({ displayValue, mode, trigUnit, ...keypadProps }) => (
   <div className="App">
     <div className={`calculator ${mode}`}>
-      <Display value={displayValue || 0} />
-      <Keypad {...keypadProps} />
+      <Display trigUnit={trigUnit} value={displayValue} mode={mode} />
+      <Keypad trigUnit={trigUnit} {...keypadProps} />
     </div>
   </div>
 )

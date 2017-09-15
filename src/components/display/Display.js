@@ -1,14 +1,13 @@
 import React from 'react'
+import scaleDisplayFontSize from '../../utils/scaleDisplayFontSize'
 import './Display.css'
 
-const Display = ({ value = '0' }) => {
-  // Adjusts fontsize based on the length of the display value, so the
-  // value fits in the display area. Might not work consistently in
-  // all browsers/devices.
-  let overflow = String(value).slice(12).length
-  let fontSize = `${100 - overflow * (overflow < 11 ? 5 : 4)}%`
+const Display = ({ value = '0', trigUnit, mode }) => {
+  // scales fontSize based on length of display value
+  let fontSize = scaleDisplayFontSize(value, mode)
   return (
     <section className="Display">
+      {mode === 'scientific' && <div className="Display-unit">{trigUnit}</div>}
       <div className="Display-value" style={{ fontSize }}>
         {value}
       </div>

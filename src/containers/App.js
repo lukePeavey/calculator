@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import App from '../components/app/App'
 import keypads from '../global/keypads'
 import { camelCase } from 'lodash'
-import Decimal from 'decimal.js'
+import Decimal from '../utils/decimal-custom'
 
 class AppContainer extends Component {
   state = {
     /**
      * Display value is the current value shown on the display screen
+     * @type {string}
      */
     displayValue: '0',
 
@@ -17,12 +18,14 @@ class AppContainer extends Component {
      * will be the result of the previous operation. On the first operation,
      * the displayValue when the operation key is pressed is stored as the
      * current output
+     * @type {null|Decimal}
      */
     currentOutput: null,
 
     /**
      * The active operation. For binary operations, this is set when the
      * operation key is pressed. The user then enters the second input value
+     * @type {null|string}
      */
     currentOperation: null,
 
@@ -32,6 +35,7 @@ class AppContainer extends Component {
      * the next number key press will reset display value and start a new
      * input. This is the case after pressing C, or after pressing an operation
      * key.
+     * @type {boolean}
      */
     resetDisplayValueOnNextKeyPress: true,
 
@@ -39,8 +43,37 @@ class AppContainer extends Component {
      * Sets the mode: 'basic' or 'scientific' (currently only 'basic').
      * This will determine which keypad to use, as well as other mode-specific
      * behavior and styles.
+     * @type {string} oneOf(['basic', 'scientific'])
      */
-    mode: 'basic'
+    mode: 'scientific',
+
+    /**
+     * Unit of measurement for angles
+     * @type {string} oneOf(['deg', 'rad'])
+     */
+    trigUnit: 'deg',
+
+    /**
+     * the stored memory value.
+     * @type {null|Decimal}
+     */
+    memory: null
+  }
+
+  // Set mode based on device orientation (only on small screens)
+  componentDidMount() {
+    const mobilePortrait = window.matchMedia('(max-width: 450px)')
+    const mobileLandscape = window.matchMedia(
+      '(max-width: 740px) and (max-height: 450px)'
+    )
+    const landscape = window.matchMedia('(orientation: landscape)')
+
+    const setMode = landscape => {
+      if (!(mobilePortrait.matches || mobileLandscape.matches)) return
+      this.setState({ mode: landscape.matches ? 'scientific' : 'basic' })
+    }
+    landscape.addListener(landscape => setMode(landscape))
+    setMode(landscape)
   }
 
   /**
@@ -68,6 +101,13 @@ class AppContainer extends Component {
     this.setState({
       displayValue: displayValue.replace(/^0+(?!\.)/, ''), // strip leading zeroes
       resetDisplayValueOnNextKeyPress: false
+    })
+  }
+
+  handleConstantKey = ({ id: constant }) => {
+    this.setState({
+      displayValue: Decimal[constant].toString(),
+      resetDisplayValueOnNextKeyPress: true
     })
   }
 
@@ -101,18 +141,21 @@ class AppContainer extends Component {
    * the operation (output) becomes the new display value.
    */
   handleUnaryOperationKey = key => {
+    const { displayValue, trigUnit } = this.state
     const operation = key.id
-    const operand = new Decimal(this.state.displayValue)
-    let output = undefined
+    let operand = new Decimal(displayValue)
 
-    // Handle special keys that dont have a corresponding method
-    if (operation === 'percent') {
-      output = operand.dividedBy(100)
-    } else {
-      output = operand[operation]()
+    // Handle conversion between radians and degrees.
+    if (/^(sin|cos|tan)$/.test(operation) && trigUnit === 'deg') {
+      operand = operand.times(new Decimal(Math.PI).dividedBy(180))
     }
 
-    this.setState({ displayValue: output.toString() })
+    let output = operand[operation]()
+
+    this.setState({
+      displayValue: output.toString(),
+      resetDisplayValueOnNextKeyPress: true
+    })
   }
 
   /**
@@ -152,16 +195,49 @@ class AppContainer extends Component {
     })
   }
 
+  handleFunctionKey({ id: functionName }) {
+    switch (functionName) {
+      case 'trigUnit':
+        return this.setState(prevState => ({
+          trigUnit: prevState.trigUnit === 'deg' ? 'rad' : 'deg'
+        }))
+
+      case 'memoryAdd':
+        return this.setState(({ memory, displayValue }) => ({
+          memory: memory ? memory.plus(displayValue) : new Decimal(displayValue)
+        }))
+
+      case 'memorySubtract':
+        return this.setState(({ memory, displayValue }) => ({
+          memory: memory ? memory.minus(displayValue) : null
+        }))
+
+      case 'memoryClear':
+        return this.setState({ memory: null })
+
+      case 'memoryRecall':
+        return (
+          this.state.memory &&
+          this.setState(({ memory }) => ({
+            displayValue: memory.toString(),
+            resetDisplayValueOnNextKeyPress: true
+          }))
+        )
+
+      case 'random':
+        return this.setState({
+          displayValue: new Decimal(Math.random()).toString(),
+          resetDisplayValueOnNextKeyPress: true
+        })
+    }
+  }
+
   /**
    * Handles click event for all calculator keys
    */
   handleClick = (event, { type }) => {
-    // Log clicks events for testing
-    console.group('Key Pressed')
-    console.info(type, event.currentTarget.id)
     // Decide which method to call based on key type
     this[camelCase(`handle-${type}-Key`)].call(this, event.currentTarget)
-    console.groupEnd()
   }
 
   render() {
@@ -171,6 +247,8 @@ class AppContainer extends Component {
         currentOperation={this.state.currentOperation}
         mode={this.state.mode}
         displayValue={this.state.displayValue}
+        trigUnit={this.state.trigUnit}
+        memory={this.state.memory}
         handleClick={this.handleClick}
       />
     )
