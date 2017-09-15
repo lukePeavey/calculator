@@ -46,9 +46,9 @@ const keypads = {
       key.subtract
     ], [
       key.factorial,
-      key.sine,
-      key.cosine,
-      key.tangent,
+      key.sin,
+      key.cos,
+      key.tan,
       key.e,
       key.exponential,
       key.one,
@@ -57,9 +57,9 @@ const keypads = {
       key.add,
     ], [
       key.trigUnit,
-      key.sineH,
-      key.cosineH,
-      key.tangentH,
+      key.sinh,
+      key.cosh,
+      key.tanh,
       key.pi,
       key.rand,
       key.zero,

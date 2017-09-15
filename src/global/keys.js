@@ -1,6 +1,6 @@
 /* Function Keys
 -----------------------------------------------*/
-export const clear =  { type: 'clear', label: 'C', id: 'clear' }
+export const clear =  { type: 'clear', label: 'AC', id: 'clear' }
 export const equals = { type: 'equals', label: '&equals;', id: 'equals' }
 export const openParenthesis = { type: 'function', label: '(', id: 'openParenthesis' }
 export const closeParenthesis = { type: 'function', label: ')', id: 'closeParenthesis' }
@@ -10,6 +10,7 @@ export const memorySubtract = { type: 'function', label: 'm&minus;', id: 'memory
 export const memoryRecall = { type: 'function', label: 'mr', id: 'memoryRecall' }
 export const alt = { type: 'function', label: '2<sup>nd</sup>', id: 'alt' }
 export const trigUnit = { type: 'function', label: 'Rad', id: 'trigUnit' }
+export const rand = { type: 'function', label: 'Rand', id: 'random' }
 
 /* Number Keys
 -----------------------------------------------*/
@@ -49,15 +50,14 @@ export const naturalLogarithm = { type: 'unaryOperation', label: 'ln', id: 'ln' 
 export const logarithm = { type: 'unaryOperation', label: 'log', id: 'log' }
 export const exponential = { type: 'unaryOperation', label: 'EE', id: 'toExponential' }
 export const factorial = { type: 'unaryOperation', label: 'x!', id: 'factorial' }
-export const sine = { type: 'unaryOperation', label: 'sin', id: 'sin' }
-export const cosine = { type: 'unaryOperation', label: 'cos', id: 'cos' }
-export const tangent = { type: 'unaryOperation', label: 'tan', id: 'tan' }
-export const sineH = { type: 'unaryOperation', label: 'sinh', id: 'sinh' }
-export const cosineH = { type: 'unaryOperation', label: 'cosh', id: 'cosh' }
-export const tangentH = { type: 'unaryOperation', label: 'tanh', id: 'tanh' }
+export const sin = { type: 'unaryOperation', label: 'sin', id: 'sin' }
+export const cos = { type: 'unaryOperation', label: 'cos', id: 'cos' }
+export const tan = { type: 'unaryOperation', label: 'tan', id: 'tan' }
+export const sinh = { type: 'unaryOperation', label: 'sinh', id: 'sinh' }
+export const cosh = { type: 'unaryOperation', label: 'cosh', id: 'cosh' }
+export const tanh = { type: 'unaryOperation', label: 'tanh', id: 'tanh' }
 
 /* Constant Keys
 -----------------------------------------------*/
 export const e = { type: 'constant', label: 'e', id: 'E' }
 export const pi = { type: 'constant', label: '&Pi;', id: 'PI' }
-export const rand = { type: 'constant', label: 'Rand', id: 'random' }
