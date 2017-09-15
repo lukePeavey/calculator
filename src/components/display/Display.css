@@ -4,9 +4,10 @@
   align-items: flex-end;
   flex: 1 1 0;
   padding: 10px 20px 10px 10px;
-  background: linear-gradient(45deg, #504b4b, #5e5757);
+  background: linear-gradient(to bottom, #2f2c2c, #444141);
   border: solid 1px #504b4b;
   border-bottom-width: 0;
+  border-radius: 10px 10px 0 0;
   font-size: 36px;
   font-weight: 300;
   color: #f1f1f1;
@@ -19,14 +20,8 @@
   letter-spacing: 0.5px;
 }
 
-@media screen and (min-width: 400px) {
-  .basic .Display {
-    border-radius: 8px 8px 0 0;
-  }
-}
-
-@media screen and (min-width: 700px) {
-  .scientific .Display {
-    border-radius: 8px 8px 0 0;
+@media (max-width: 450px), (max-width: 740px) and (max-height: 450px) {
+  .Display {
+    border-radius: 0;
   }
 }

@@ -62,9 +62,9 @@ class AppContainer extends Component {
 
   // Set mode based on device orientation (only on small screens)
   componentDidMount() {
-    const mobilePortrait = window.matchMedia('(max-width: 420px)')
+    const mobilePortrait = window.matchMedia('(max-width: 450px)')
     const mobileLandscape = window.matchMedia(
-      '(max-width: 740px) and (max-height: 420px)'
+      '(max-width: 740px) and (max-height: 450px)'
     )
     const landscape = window.matchMedia('(orientation: landscape)')
 

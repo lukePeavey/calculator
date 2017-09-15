@@ -11,3 +11,14 @@ This allows the hight of the calculator to scale on smaller screens. */
   display: flex;
   flex: 1 0 20%;
 }
+
+.Keypad-row:last-of-type {
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 450px), (max-width: 740px) and (max-height: 450px) {
+  .Keypad-row:last-of-type {
+    border-radius: 0;
+  }
+}
