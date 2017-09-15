@@ -2,7 +2,13 @@ import React from 'react'
 import Key from '../key/Key'
 import './Keypad.css'
 
-const Keypad = ({ keys: rows, handleClick, currentOperation, trigUnit }) => (
+const Keypad = ({
+  keys: rows,
+  handleClick,
+  currentOperation,
+  trigUnit,
+  memory
+}) => (
   <section className="Keypad">
     {rows.map((keys, index) => (
       <div className="Keypad-row" key={`row${index}`}>
@@ -10,7 +16,10 @@ const Keypad = ({ keys: rows, handleClick, currentOperation, trigUnit }) => (
           <Key
             key={keyProps.id}
             handleClick={handleClick}
-            active={currentOperation === keyProps.id}
+            active={
+              currentOperation === keyProps.id ||
+              ('memoryRecall' === keyProps.id && memory !== null)
+            }
             trigUnit={trigUnit}
             {...keyProps}
           />

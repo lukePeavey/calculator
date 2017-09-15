@@ -16,7 +16,7 @@ const keypads = {
       key.closeParenthesis,
       key.memoryClear,
       key.memoryAdd,
-      key.memoryRemove,
+      key.memorySubtract,
       key.memoryRecall,
       key.clear,
       key.negate,

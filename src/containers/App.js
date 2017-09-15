@@ -51,7 +51,13 @@ class AppContainer extends Component {
      * Unit of measurement for angles
      * @type {string} oneOf(['deg', 'rad'])
      */
-    trigUnit: 'deg'
+    trigUnit: 'deg',
+
+    /**
+     * the stored memory value.
+     * @type {null|Decimal}
+     */
+    memory: null
   }
 
   // Set mode based on device orientation (only on small screens)
@@ -182,11 +188,34 @@ class AppContainer extends Component {
     })
   }
 
-  handleFunctionKey(key) {
-    if (key.id === 'trigUnit') {
-      this.setState(prevState => ({
-        trigUnit: prevState.trigUnit === 'deg' ? 'rad' : 'deg'
-      }))
+  handleFunctionKey({ id: functionName }) {
+    switch (functionName) {
+      case 'trigUnit':
+        return this.setState(prevState => ({
+          trigUnit: prevState.trigUnit === 'deg' ? 'rad' : 'deg'
+        }))
+
+      case 'memoryAdd':
+        return this.setState(({ memory, displayValue }) => ({
+          memory: memory ? memory.plus(displayValue) : new Decimal(displayValue)
+        }))
+
+      case 'memorySubtract':
+        return this.setState(({ memory, displayValue }) => ({
+          memory: memory ? memory.minus(displayValue) : null
+        }))
+
+      case 'memoryClear':
+        return this.setState({ memory: null })
+
+      case 'memoryRecall':
+        return (
+          this.state.memory &&
+          this.setState(({ memory }) => ({
+            displayValue: memory.toString(),
+            resetDisplayValueOnNextKeyPress: true
+          }))
+        )
     }
   }
 
@@ -206,6 +235,7 @@ class AppContainer extends Component {
         mode={this.state.mode}
         displayValue={this.state.displayValue}
         trigUnit={this.state.trigUnit}
+        memory={this.state.memory}
         handleClick={this.handleClick}
       />
     )
