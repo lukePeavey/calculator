@@ -104,6 +104,13 @@ class AppContainer extends Component {
     })
   }
 
+  handleConstantKey = ({ id: constant }) => {
+    this.setState({
+      displayValue: Decimal[constant].toString(),
+      resetDisplayValueOnNextKeyPress: true
+    })
+  }
+
   /**
    * Handle Binary Operations (operations with two input values)
    */
@@ -216,6 +223,12 @@ class AppContainer extends Component {
             resetDisplayValueOnNextKeyPress: true
           }))
         )
+
+      case 'random':
+        return this.setState({
+          displayValue: new Decimal(Math.random()).toString(),
+          resetDisplayValueOnNextKeyPress: true
+        })
     }
   }
 
