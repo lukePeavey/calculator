@@ -46,4 +46,7 @@ Decimal.prototype.factorial = function factorial() {
   return x
 }
 
+Decimal.PI = Decimal.acos(-1)
+Decimal.E = new Decimal(2.7182818284590452353602874713527)
+
 export default Decimal

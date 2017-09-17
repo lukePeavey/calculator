@@ -147,7 +147,8 @@ class AppContainer extends Component {
 
     // Handle conversion between radians and degrees.
     if (/^(sin|cos|tan)$/.test(operation) && trigUnit === 'deg') {
-      operand = operand.times(new Decimal(Math.PI).dividedBy(180))
+      const PI = Decimal.acos(-1)
+      operand = operand.times(new Decimal(PI).dividedBy(180))
     }
 
     let output = operand[operation]()
