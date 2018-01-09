@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import App from '../components/app/App'
-import keypads from '../global/keypads'
+import keypads from '../constants/keypads'
 import { camelCase } from 'lodash'
 import Decimal from '../utils/decimal-custom'
 
