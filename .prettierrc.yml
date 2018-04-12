@@ -1,0 +1,8 @@
+semi: false
+printWidth: 80
+jsxBracketSameLine: true
+singleQuote: true
+overrides:
+- files: "src/constants/keys.js"
+  options:
+    printWidth: 120
