@@ -57,3 +57,6 @@ A calculator app built with React. The functionality and design are based on App
 
 ### Live Demo:
 https://lukepeavey.github.io/calculator/
+
+### CodeSandbox Demo (with FCC Test suite)
+https://codesandbox.io/s/m480mov5y8?view=preview
