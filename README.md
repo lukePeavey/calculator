@@ -1,17 +1,34 @@
-Calculator
-=====================
-A calculator app built with React. The functionality and design are based on Apple's calculator app.
+# Calculator App
 
-- Includes basic and scientific modes
+_This project is part of the FreeCodeCamp Front End Libraries Certification._
+
+### Description
+
+### Progressive Web App
+
+**Lighthouse Audit**
+
+![jer](screenshots/lighthouse-audit.png)
+
+
+This is a clone of the IOS calculator app, built with React.
+
+My goal was to reverse engineer the IOS calcutor app (before it )
 - Can be installed as a mobile app (Android/windows only)
 - On mobile, the calculator mode is set based on device orientation... rotating device to landscape switches to scientific mode, portrait for basic mode.
 
 ![image](screenshots/screenshot-scientific.png)
 
+#### Operation keys
 
-#### Scientific Keys
 | Key  | description |
 |:-----|:-----------------|
+| +/- | Negate the displayed value |
+| % | Convert displayed value to a percentage |
+| / | Divide displayed value by the next value entered |
+| + | Add the next value entered to the displayed  value |
+| - | Subtract  the next value entered from the displayed value |
+| x | Multiply displayed value by next value entered |
 | X<sup>2</sup>  | square the displayed value |
 | X<sup>3</sup>  | cube the displayed   value |
 | X<sup>y</sup>  | Raise the displayed value to the power of the next value entered |
@@ -43,16 +60,6 @@ A calculator app built with React. The functionality and design are based on App
 | rad | Set the unit of measurement for angles to radians |
 | deg | Set the unit of measurement for angles to degrees |
 
-
-#### Basic keys
-| Key  | description |
-|:-----|:-----------------|
-| +/- | Negate the displayed value |
-| % | Convert displayed value to a percentage |
-| / | Divide displayed value by the next value entered |
-| + | Add the next value entered to the displayed  value |
-| - | Subtract  the next value entered from the displayed value |
-| x | Multiply displayed value by next value entered |
 
 
 ### Live Demo:
